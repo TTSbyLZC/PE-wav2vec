@@ -19,7 +19,7 @@
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
-    .srctext {font-size: 22px;}
+    .srctext {font-size: 17px;}
     h1 {font-size: 1.75em;}
     h2 {margin-bottom: 0.4em;}
     hr {
@@ -37,10 +37,17 @@
   <h1>PE-wav2vec: A Prosody-Enhanced Speech Model for Self-Supervised Prosody Learning in TTS</h1>
   <p>
 
-  <div><b>Authors</b>: <em>...</em></div>
-  <div><b>Abstract</b>: ...</div>
+  <div><b>Authors</b>: Zhao-Ci Liu, Liping Chen, Ya-Jun Hu, Zhen-Hua Ling, <em>Senior Member, IEEE</em>,  and Jia Pan</div>
+  <div><b>Abstract</b>: This paper investigates leveraging large-scale untranscribed speech data to improve the prosody modeling capability of <em>text-to-speech</em> (TTS) models. Based on the self-supervised speech model wav2vec 2.0, the <em>Prosody-Enhanced wav2vec</em> (PE-wav2vec) is proposed by introducing explicit prosody learning. To be specific, the prosody learning is fulfilled by exerting the supervision from the <em>linear predictive coding</em> (LPC) residual signals on the lower Transformer blocks in the wav2vec 2.0 structure.
+    The embedding vectors extracted with the lower Transformer blocks of the PE-wav2vec model are used as the prosody representations of corresponding frames in a speech utterance.
+    To apply the PE-wav2vec representations in TTS, an acoustic model named <em>Speech Synthesis model conditioned on Self-Supervisedly Learnt Prosodic Representations</em> (S4LPR) is designed based on FastSpeech 2.
+    The experimental results demonstrate that the proposed PE-wav2vec model is capable of providing richer descriptions on the prosody attributes of speech than the vanilla wav2vec 2.0 model.
+    Furthermore, the S4LPR model using PE-wav2vec representations can effectively improve the subjective naturalness and reduce the objective distortions of synthetic speech compared with baseline models.</div>
   <div><b>Comments</b>: ...</div>
-  <div><b>Audio samples</b>:    </div>
+
+  <br>
+  <div><b></b></div>
+  <h2><b>Model comparison</b>:    </h2>
   <hr>
 
   <table>
@@ -60,6 +67,7 @@
     </tr>
   </table>
   <div class="srctext"><b>Text</b>: <em>里面的 走廊 宽阔 而 阴森  ， 头顶 是 绿罩灯  ， 脚下的 地毯 很厚  ， 厚到 扔一个 摔炮 上去 都不会 发出 声音  。</em></div>
+  <div class="srctext"><b>Translation</b>: <em>The corridor inside is spacious and gloomy, with green shaded lamps overhead. The carpet below is so thick that even if you dropped a firecracker on it, it wouldn't make a sound. </em></div>
 
   <hr>
 
@@ -81,6 +89,7 @@
     </tr>
   </table>
   <div class="srctext"><b>Text</b>: <em>封口 被 撞裂 开来  ， 佛头 从 里面 滚出来  ， 顺着 书堆 咕噜 下去  ， 咣当 一声 砸在 水泥 地上  。</em></div>
+  <div class="srctext"><b>Translation</b>: <em>The seal was smashed open, and the Buddha's head rolled out from inside, tumbling down the pile of books and landing on the concrete floor with a thud. </em></div>
 
   <hr>
 
@@ -102,6 +111,7 @@
     </tr>
   </table>
   <div class="srctext"><b>Text</b>: <em>总而 言之  ， 这些 女武神 正在 奋力 扫描 战场  ， 随时 做好 战斗 准备  ， 不论 扫描到 什么 敌友  。</em></div>
+  <div class="srctext"><b>Translation</b>: <em>In summary, these Valkyries are vigorously scanning the battlefield, always ready for battle, regardless of whatever friends or foes they detect. </em></div>
 
   <hr>
 
@@ -123,6 +133,7 @@
     </tr>
   </table>
   <div class="srctext"><b>Text</b>: <em>故此  ， 摩诃叶 不惜 施展 苦肉计 死守 捱招  ， 直到 最关键 时刻 方才 奇兵 突出  ， 要一击 制胜  。</em></div>
+  <div class="srctext"><b>Translation</b>: <em>Therefore, Mahakasyapa, at all costs, resorted to a strategy of feigning weakness and enduring attacks, holding out until the most critical moment, before finally launching a surprise attack to secure victory in one strike. </em></div>
 
   <hr>
 
@@ -144,6 +155,7 @@
     </tr>
   </table>
   <div class="srctext"><b>Text</b>: <em>曾思涛 脑子里 这么 想的 时候  ， 不觉的 骂自己 很扯淡  ， 胡思 乱想的 水平 最近 有 飞跃的 意思  。</em></div>
+  <div class="srctext"><b>Translation</b>: <em>When Zeng Sitao had these thoughts in his mind, he couldn't help but curse himself for being ridiculous, realizing that his level of wild imagination had recently taken a significant leap. </em></div>
 
   <hr>
 
@@ -165,6 +177,34 @@
     </tr>
   </table>
   <div class="srctext"><b>Text</b>: <em>这里 是间 办公室  ， 当中 一张 厚实的 办公桌  ， 两侧 两个 大书架 足足 占了 两面墙  。</em></div>
+  <div class="srctext"><b>Translation</b>: <em>This is an office, featuring a sturdy desk in the center, with two large bookshelves occupying two entire walls on either side. </em></div>
+
+  <hr>
+
+
+
+  <br>
+  <h2><b>Ablation study</b>:    </h2>
+
+  <hr>
+  <table>
+    <tr>
+      <th style="text-align: center">GroundTruth</th>
+<th style="text-align: center">Proposed</th>
+<th style="text-align: center">-L_w2v2</th>
+<th style="text-align: center">-Split</th>
+<th style="text-align: center">-Conv</th>
+    </tr>
+    <tr>
+      <td style="text-align: center"><audio controls="controls"><source src="./GT\00000112.wav" autoplay /></audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed\00000112.wav" autoplay /></audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-Lw2v2\00000112.wav" autoplay /></audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-Split\00000112.wav" autoplay /></audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-Conv\00000112.wav" autoplay /></audio></td>
+    </tr>
+  </table>
+  <div class="srctext"><b>Text</b>: <em>里面的 走廊 宽阔 而 阴森  ， 头顶 是 绿罩灯  ， 脚下的 地毯 很厚  ， 厚到 扔一个 摔炮 上去 都不会 发出 声音  。</em></div>
+  <div class="srctext"><b>Translation</b>: <em>The corridor inside is spacious and gloomy, with green shaded lamps overhead. The carpet below is so thick that even if you dropped a firecracker on it, it wouldn't make a sound. </em></div>
 
   <hr>
 
@@ -172,20 +212,21 @@
   <table>
     <tr>
       <th style="text-align: center">GroundTruth</th>
-<th style="text-align: center">Baseline</th>
-<th style="text-align: center">Pitch-Energy</th>
-<th style="text-align: center">W2v2</th>
 <th style="text-align: center">Proposed</th>
+<th style="text-align: center">-L_w2v2</th>
+<th style="text-align: center">-Split</th>
+<th style="text-align: center">-Conv</th>
     </tr>
     <tr>
-      <td style="text-align: center"><audio controls="controls"><source src="./GT\00009645.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./FS2\00009645.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./PR_pitch_energy\00009645.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./LPR_w2v2\00009645.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed\00009645.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./GT\00000640.wav" autoplay /></audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed\00000640.wav" autoplay /></audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-Lw2v2\00000640.wav" autoplay /></audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-Split\00000640.wav" autoplay /></audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-Conv\00000640.wav" autoplay /></audio></td>
     </tr>
   </table>
-  <div class="srctext"><b>Text</b>: <em>有的 果农 干脆 在 鲜桃堆 插一根 树枝  ， 挂个 塑料袋  ， 让 路人 自己 拿桃子  ， 自己 往 袋子里 扔钱  。</em></div>
+  <div class="srctext"><b>Text</b>: <em>封口 被 撞裂 开来  ， 佛头 从 里面 滚出来  ， 顺着 书堆 咕噜 下去  ， 咣当 一声 砸在 水泥 地上  。</em></div>
+  <div class="srctext"><b>Translation</b>: <em>The seal was smashed open, and the Buddha's head rolled out from inside, tumbling down the pile of books and landing on the concrete floor with a thud. </em></div>
 
   <hr>
 
@@ -193,22 +234,87 @@
   <table>
     <tr>
       <th style="text-align: center">GroundTruth</th>
-<th style="text-align: center">Baseline</th>
-<th style="text-align: center">Pitch-Energy</th>
-<th style="text-align: center">W2v2</th>
 <th style="text-align: center">Proposed</th>
+<th style="text-align: center">-L_w2v2</th>
+<th style="text-align: center">-Split</th>
+<th style="text-align: center">-Conv</th>
     </tr>
     <tr>
-      <td style="text-align: center"><audio controls="controls"><source src="./GT\00006394.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./FS2\00006394.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./PR_pitch_energy\00006394.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./LPR_w2v2\00006394.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed\00006394.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./GT\00015144.wav" autoplay /></audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed\00015144.wav" autoplay /></audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-Lw2v2\00015144.wav" autoplay /></audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-Split\00015144.wav" autoplay /></audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-Conv\00015144.wav" autoplay /></audio></td>
     </tr>
   </table>
-  <div class="srctext"><b>Text</b>: <em>每说 一个 名字  ， 左拉 就会 伸出 一根 手指  ， 晶莹 如玉的 手指 散发着 柔和的 光泽  ， 伸到 卢杰 面前  。</em></div>
+  <div class="srctext"><b>Text</b>: <em>总而 言之  ， 这些 女武神 正在 奋力 扫描 战场  ， 随时 做好 战斗 准备  ， 不论 扫描到 什么 敌友  。</em></div>
+  <div class="srctext"><b>Translation</b>: <em>In summary, these Valkyries are vigorously scanning the battlefield, always ready for battle, regardless of whatever friends or foes they detect. </em></div>
 
   <hr>
+
+
+  <table>
+    <tr>
+      <th style="text-align: center">GroundTruth</th>
+<th style="text-align: center">Proposed</th>
+<th style="text-align: center">-L_w2v2</th>
+<th style="text-align: center">-Split</th>
+<th style="text-align: center">-Conv</th>
+    </tr>
+    <tr>
+      <td style="text-align: center"><audio controls="controls"><source src="./GT\00015288.wav" autoplay /></audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed\00015288.wav" autoplay /></audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-Lw2v2\00015288.wav" autoplay /></audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-Split\00015288.wav" autoplay /></audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-Conv\00015288.wav" autoplay /></audio></td>
+    </tr>
+  </table>
+  <div class="srctext"><b>Text</b>: <em>故此  ， 摩诃叶 不惜 施展 苦肉计 死守 捱招  ， 直到 最关键 时刻 方才 奇兵 突出  ， 要一击 制胜  。</em></div>
+  <div class="srctext"><b>Translation</b>: <em>Therefore, Mahakasyapa, at all costs, resorted to a strategy of feigning weakness and enduring attacks, holding out until the most critical moment, before finally launching a surprise attack to secure victory in one strike. </em></div>
+
+  <hr>
+
+
+  <table>
+    <tr>
+      <th style="text-align: center">GroundTruth</th>
+<th style="text-align: center">Proposed</th>
+<th style="text-align: center">-L_w2v2</th>
+<th style="text-align: center">-Split</th>
+<th style="text-align: center">-Conv</th>
+    </tr>
+    <tr>
+      <td style="text-align: center"><audio controls="controls"><source src="./GT\00005099.wav" autoplay /></audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed\00005099.wav" autoplay /></audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-Lw2v2\00005099.wav" autoplay /></audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-Split\00005099.wav" autoplay /></audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-Conv\00005099.wav" autoplay /></audio></td>
+    </tr>
+  </table>
+  <div class="srctext"><b>Text</b>: <em>曾思涛 脑子里 这么 想的 时候  ， 不觉的 骂自己 很扯淡  ， 胡思 乱想的 水平 最近 有 飞跃的 意思  。</em></div>
+  <div class="srctext"><b>Translation</b>: <em>When Zeng Sitao had these thoughts in his mind, he couldn't help but curse himself for being ridiculous, realizing that his level of wild imagination had recently taken a significant leap. </em></div>
+
+  <hr>
+
+
+  <table>
+    <tr>
+      <th style="text-align: center">GroundTruth</th>
+<th style="text-align: center">Proposed</th>
+<th style="text-align: center">-L_w2v2</th>
+<th style="text-align: center">-Split</th>
+<th style="text-align: center">-Conv</th>
+    </tr>
+    <tr>
+      <td style="text-align: center"><audio controls="controls"><source src="./GT\00000195.wav" autoplay /></audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed\00000195.wav" autoplay /></audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-Lw2v2\00000195.wav" autoplay /></audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-Split\00000195.wav" autoplay /></audio></td>
+<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-Conv\00000195.wav" autoplay /></audio></td>
+    </tr>
+  </table>
+  <div class="srctext"><b>Text</b>: <em>这里 是间 办公室  ， 当中 一张 厚实的 办公桌  ， 两侧 两个 大书架 足足 占了 两面墙  。</em></div>
+  <div class="srctext"><b>Translation</b>: <em>This is an office, featuring a sturdy desk in the center, with two large bookshelves occupying two entire walls on either side. </em></div>
 
   </p>
   <hr>
