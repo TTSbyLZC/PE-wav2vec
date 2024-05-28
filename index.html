@@ -8,16 +8,23 @@
   <title>TTS Demos</title>
   <style>
     body {
-      margin: 0% 0%;
+       /* margin: 0% 0%; */
+      max-width: 1366px;  /* 最大宽度 */
+      margin-left: auto;
+      margin-right: auto;
       padding: 50px 30px;
       background: #fff;
       color: #111;
+      text-align: justify;
       font-size: 17px;
       font-family: sans-serif;
       font-weight: 400;
       line-height: 1.8;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
+    }
+    .justify-text {
+      text-align: justify;
     }
     .srctext {font-size: 17px;}
     h1 {font-size: 1.75em;}
@@ -28,42 +35,48 @@
       color: lightgray;
       background-color: lightgray
     }
-    table {width: 100%;}
-    audio {width: 250px;}
+    table {table-layout: fixed;}
+    audio {width: 220px;}
   </style>
 </head>
 
 <body>
   <h1>PE-wav2vec: A Prosody-Enhanced Speech Model for Self-Supervised Prosody Learning in TTS</h1>
-  <p>
+  
 
+  <p>
   <div><b>Authors</b>: Zhao-Ci Liu, Liping Chen, Ya-Jun Hu, Zhen-Hua Ling, <em>Senior Member, IEEE</em>,  and Jia Pan</div>
-  <div><b>Abstract</b>: This paper investigates leveraging large-scale untranscribed speech data to improve the prosody modeling capability of <em>text-to-speech</em> (TTS) models. Based on the self-supervised speech model wav2vec 2.0, the <em>Prosody-Enhanced wav2vec</em> (PE-wav2vec) is proposed by introducing explicit prosody learning. To be specific, the prosody learning is fulfilled by exerting the supervision from the <em>linear predictive coding</em> (LPC) residual signals on the initial Transformer blocks in the wav2vec 2.0 structure.
+  <div class="justify-text"><b>Abstract</b>: This paper investigates leveraging large-scale untranscribed speech data to improve the prosody modeling capability of <em>text-to-speech</em> (TTS) models. Based on the self-supervised speech model wav2vec 2.0, the <em>Prosody-Enhanced wav2vec</em> (PE-wav2vec) is proposed by introducing explicit prosody learning. To be specific, the prosody learning is fulfilled by exerting the supervision from the <em>linear predictive coding</em> (LPC) residual signals on the initial Transformer blocks in the wav2vec 2.0 structure.
     The embedding vectors extracted with the initial Transformer blocks of the PE-wav2vec model are used as the prosody representations of corresponding frames in a speech utterance.
     To apply the PE-wav2vec representations in TTS, an acoustic model named <em>Speech Synthesis model conditioned on Self-Supervisedly Learnt Prosodic Representations</em> (S4LPR) is designed based on FastSpeech 2.
     The experimental results demonstrate that the proposed PE-wav2vec model is capable of providing richer descriptions on the prosody attributes of speech than the vanilla wav2vec 2.0 model.
     Furthermore, the S4LPR model using PE-wav2vec representations can effectively improve the subjective naturalness and reduce the objective distortions of synthetic speech compared with baseline models.</div>
-  <div><b>Comments</b>: ...</div>
+  <div><b>Comments</b>: Submitted to IEEE/ACM TASLP.</div>
+  </p>
 
+
+  <p>
   <br>
   <div><b></b></div>
-  <h2><b>Model comparison</b>:    </h2>
+  <h2><b>Model comparison (Internal) </b>:    </h2>
   <hr>
 
   <table>
     <tr>
       <th style="text-align: center">GroundTruth</th>
-<th style="text-align: center">Baseline</th>
-<th style="text-align: center">Pitch-Energy</th>
-<th style="text-align: center">W2v2</th>
-<th style="text-align: center">Proposed</th>
+      <th style="text-align: center">FastSpeech2</th>
+      <th style="text-align: center">SALTTS</th>
+      <th style="text-align: center">Pitch-Energy</th>
+      <th style="text-align: center">W2v2</th>
+      <th style="text-align: center">Proposed</th>
     </tr>
     <tr>
-      <td style="text-align: center"><audio controls="controls"><source src="./GT\00000112.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./FS2\00000112.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./PR_pitch_energy\00000112.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./LPR_w2v2\00000112.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed\00000112.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./GT/00000112.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./FS2/00000112.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./SALTTS_hubert/00000112.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./PR_pitch_energy/00000112.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./LPR_w2v2/00000112.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed/00000112.wav" autoplay /></audio></td>
     </tr>
   </table>
   <div class="srctext"><b>Text</b>: <em>里面的 走廊 宽阔 而 阴森  ， 头顶 是 绿罩灯  ， 脚下的 地毯 很厚  ， 厚到 扔一个 摔炮 上去 都不会 发出 声音  。</em></div>
@@ -75,17 +88,19 @@
   <table>
     <tr>
       <th style="text-align: center">GroundTruth</th>
-<th style="text-align: center">Baseline</th>
-<th style="text-align: center">Pitch-Energy</th>
-<th style="text-align: center">W2v2</th>
-<th style="text-align: center">Proposed</th>
+      <th style="text-align: center">FastSpeech2</th>
+      <th style="text-align: center">SALTTS</th>
+      <th style="text-align: center">Pitch-Energy</th>
+      <th style="text-align: center">W2v2</th>
+      <th style="text-align: center">Proposed</th>
     </tr>
     <tr>
-      <td style="text-align: center"><audio controls="controls"><source src="./GT\00000640.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./FS2\00000640.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./PR_pitch_energy\00000640.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./LPR_w2v2\00000640.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed\00000640.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./GT/00000640.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./FS2/00000640.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./SALTTS_hubert/00000640.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./PR_pitch_energy/00000640.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./LPR_w2v2/00000640.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed/00000640.wav" autoplay /></audio></td>
     </tr>
   </table>
   <div class="srctext"><b>Text</b>: <em>封口 被 撞裂 开来  ， 佛头 从 里面 滚出来  ， 顺着 书堆 咕噜 下去  ， 咣当 一声 砸在 水泥 地上  。</em></div>
@@ -97,17 +112,19 @@
   <table>
     <tr>
       <th style="text-align: center">GroundTruth</th>
-<th style="text-align: center">Baseline</th>
-<th style="text-align: center">Pitch-Energy</th>
-<th style="text-align: center">W2v2</th>
-<th style="text-align: center">Proposed</th>
+      <th style="text-align: center">FastSpeech2</th>
+      <th style="text-align: center">SALTTS</th>
+      <th style="text-align: center">Pitch-Energy</th>
+      <th style="text-align: center">W2v2</th>
+      <th style="text-align: center">Proposed</th>
     </tr>
     <tr>
-      <td style="text-align: center"><audio controls="controls"><source src="./GT\00015288.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./FS2\00015288.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./PR_pitch_energy\00015288.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./LPR_w2v2\00015288.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed\00015288.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./GT/00015288.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./FS2/00015288.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./SALTTS_hubert/00015288.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./PR_pitch_energy/00015288.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./LPR_w2v2/00015288.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed/00015288.wav" autoplay /></audio></td>
     </tr>
   </table>
   <div class="srctext"><b>Text</b>: <em>故此  ， 摩诃叶 不惜 施展 苦肉计 死守 捱招  ， 直到 最关键 时刻 方才 奇兵 突出  ， 要一击 制胜  。</em></div>
@@ -119,17 +136,19 @@
   <table>
     <tr>
       <th style="text-align: center">GroundTruth</th>
-<th style="text-align: center">Baseline</th>
-<th style="text-align: center">Pitch-Energy</th>
-<th style="text-align: center">W2v2</th>
-<th style="text-align: center">Proposed</th>
+      <th style="text-align: center">FastSpeech2</th>
+      <th style="text-align: center">SALTTS</th>
+      <th style="text-align: center">Pitch-Energy</th>
+      <th style="text-align: center">W2v2</th>
+      <th style="text-align: center">Proposed</th>
     </tr>
     <tr>
-      <td style="text-align: center"><audio controls="controls"><source src="./GT\00005099.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./FS2\00005099.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./PR_pitch_energy\00005099.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./LPR_w2v2\00005099.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed\00005099.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./GT/00005099.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./FS2/00005099.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./SALTTS_hubert/00005099.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./PR_pitch_energy/00005099.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./LPR_w2v2/00005099.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed/00005099.wav" autoplay /></audio></td>
     </tr>
   </table>
   <div class="srctext"><b>Text</b>: <em>曾思涛 脑子里 这么 想的 时候  ， 不觉的 骂自己 很扯淡  ， 胡思 乱想的 水平 最近 有 飞跃的 意思  。</em></div>
@@ -141,17 +160,19 @@
   <table>
     <tr>
       <th style="text-align: center">GroundTruth</th>
-<th style="text-align: center">Baseline</th>
-<th style="text-align: center">Pitch-Energy</th>
-<th style="text-align: center">W2v2</th>
-<th style="text-align: center">Proposed</th>
+      <th style="text-align: center">FastSpeech2</th>
+      <th style="text-align: center">SALTTS</th>
+      <th style="text-align: center">Pitch-Energy</th>
+      <th style="text-align: center">W2v2</th>
+      <th style="text-align: center">Proposed</th>
     </tr>
     <tr>
-      <td style="text-align: center"><audio controls="controls"><source src="./GT\00000195.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./FS2\00000195.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./PR_pitch_energy\00000195.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./LPR_w2v2\00000195.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed\00000195.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./GT/00000195.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./FS2/00000195.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./SALTTS_hubert/00000195.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./PR_pitch_energy/00000195.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./LPR_w2v2/00000195.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed/00000195.wav" autoplay /></audio></td>
     </tr>
   </table>
   <div class="srctext"><b>Text</b>: <em>这里 是间 办公室  ， 当中 一张 厚实的 办公桌  ， 两侧 两个 大书架 足足 占了 两面墙  。</em></div>
@@ -159,6 +180,128 @@
 
   <hr>
 
+
+  <br>
+  <h2><b>Model comparision (BC19)</b>:    </h2>
+
+  <table>
+    <tr>
+      <th style="text-align: center">GroundTruth</th>
+      <th style="text-align: center">FastSpeech2</th>
+      <th style="text-align: center">SALTTS</th>
+      <th style="text-align: center">Pitch-Energy</th>
+      <th style="text-align: center">W2v2</th>
+      <th style="text-align: center">Proposed</th>
+    </tr>
+    <tr>
+      <td style="text-align: center"><audio controls="controls"><source src="./BC19/GT/10001010.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./BC19/FS2/10001010.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./BC19/SALTTS_hubert/10001010.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./BC19/PR_pitch_energy/10001010.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./BC19/LPR_w2v2/10001010.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./BC19/LPR_proposed/10001010.wav" autoplay /></audio></td>
+    </tr>
+  </table>
+  <div class="srctext"><b>Text</b>: <em>你看  ， 一个 行业的 红利 往往 不是被 水平 最高 或者是 职位 最高的 人 拿走哒  ， 而是被 最能写 和 最能说的 人 拿走哒  ， 道理 就在这  。</em></div>
+  <div class="srctext"><b>Translation</b>: <em>You see, the dividends of an industry are often reaped not by those with the highest rank or position, but by those who are most skilled in writing and speaking. That's where the truth lies.</em></div>
+
+  <hr>
+
+
+  <table>
+    <tr>
+      <th style="text-align: center">GroundTruth</th>
+      <th style="text-align: center">FastSpeech2</th>
+      <th style="text-align: center">SALTTS</th>
+      <th style="text-align: center">Pitch-Energy</th>
+      <th style="text-align: center">W2v2</th>
+      <th style="text-align: center">Proposed</th>
+    </tr>
+    <tr>
+      <td style="text-align: center"><audio controls="controls"><source src="./BC19/GT/10006008.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./BC19/FS2/10006008.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./BC19/SALTTS_hubert/10006008.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./BC19/PR_pitch_energy/10006008.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./BC19/LPR_w2v2/10006008.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./BC19/LPR_proposed/10006008.wav" autoplay /></audio></td>
+    </tr>
+  </table>
+  <div class="srctext"><b>Text</b>: <em>他 眼前 就有 一笔钱 可赚  ， 你 要求 他 为了 某个 远见 放弃 这机会  ， 其实 也就是 放弃 眼下的 生存  ， 这个 太 不近 人情啦  。</em></div>
+  <div class="srctext"><b>Translation</b>: <em>He has the opportunity to make money right in front of him. Asking him to give up this opportunity for some long-term vision is essentially asking him to forgo his current means of survival, which is not very considerate.</em></div>
+
+  <hr>
+
+
+  <table>
+    <tr>
+      <th style="text-align: center">GroundTruth</th>
+      <th style="text-align: center">FastSpeech2</th>
+      <th style="text-align: center">SALTTS</th>
+      <th style="text-align: center">Pitch-Energy</th>
+      <th style="text-align: center">W2v2</th>
+      <th style="text-align: center">Proposed</th>
+    </tr>
+    <tr>
+      <td style="text-align: center"><audio controls="controls"><source src="./BC19/GT/10015803.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./BC19/FS2/10015803.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./BC19/SALTTS_hubert/10015803.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./BC19/PR_pitch_energy/10015803.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./BC19/LPR_w2v2/10015803.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./BC19/LPR_proposed/10015803.wav" autoplay /></audio></td>
+    </tr>
+  </table>
+  <div class="srctext"><b>Text</b>: <em>那 什么 时候 有机会 打破 规矩呢  ， 就是 三种 情况啊  ， 第一种  ， 连接的 成本 已经 很低  ， 啊 比如 在 家里  ， 两口子 之间 立的 那些 规矩  ， 他就 不容易 长期 保持  ， 所谓 清官 难断 家务事 也就是 这个 原因  。</em></div>
+  <div class="srctext"><b>Translation</b>: <em>So, when is there an opportunity to break the rules? There are three situations. The first is when the cost of connection is already very low. For example, at home, the rules between a couple are not easy to maintain for a long time. This is the so-called "it is difficult for an honest official to manage household matters."</em></div>
+
+  <hr>
+
+
+  <table>
+    <tr>
+      <th style="text-align: center">GroundTruth</th>
+      <th style="text-align: center">FastSpeech2</th>
+      <th style="text-align: center">SALTTS</th>
+      <th style="text-align: center">Pitch-Energy</th>
+      <th style="text-align: center">W2v2</th>
+      <th style="text-align: center">Proposed</th>
+    </tr>
+    <tr>
+      <td style="text-align: center"><audio controls="controls"><source src="./BC19/GT/10026107.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./BC19/FS2/10026107.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./BC19/SALTTS_hubert/10026107.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./BC19/PR_pitch_energy/10026107.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./BC19/LPR_w2v2/10026107.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./BC19/LPR_proposed/10026107.wav" autoplay /></audio></td>
+    </tr>
+  </table>
+  <div class="srctext"><b>Text</b>: <em>那 公司嘛 当然是 大批 寄送  ， 采购 月饼 怎么 更便宜呀 寄送 怎么 更高效啊  ， 这种 效率 导向的 事 他们会 做得 很好哒  。</em></div>
+  <div class="srctext"><b>Translation</b>: <em>The company naturally handles large-scale shipments. They excel at making mooncake purchases cheaper and shipping more efficient, focusing on efficiency-oriented tasks.</em></div>
+
+  <hr>
+
+
+  <table>
+    <tr>
+      <th style="text-align: center">GroundTruth</th>
+      <th style="text-align: center">FastSpeech2</th>
+      <th style="text-align: center">SALTTS</th>
+      <th style="text-align: center">Pitch-Energy</th>
+      <th style="text-align: center">W2v2</th>
+      <th style="text-align: center">Proposed</th>
+    </tr>
+    <tr>
+      <td style="text-align: center"><audio controls="controls"><source src="./BC19/GT/10026111.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./BC19/FS2/10026111.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./BC19/SALTTS_hubert/10026111.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./BC19/PR_pitch_energy/10026111.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./BC19/LPR_w2v2/10026111.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./BC19/LPR_proposed/10026111.wav" autoplay /></audio></td>
+    </tr>
+  </table>
+  <div class="srctext"><b>Text</b>: <em>你看  ， 追逐 效率 当然 对 但是 它有 负面 作用  ， 那就是  ， 你 也许 只是 在做 发挥 长项的 事  ， 但是  ， 它在 你心里 会 形成 一个 认知 屏障  ， 让你 误以为 自己 努力啦 所以 是在 做 有效果的 事啊  。</em></div>
+  <div class="srctext"><b>Translation</b>: <em>You see, pursuing efficiency is certainly important, but it has a downside: you may only be doing things that play to your strengths. This can create a cognitive barrier, leading you to mistakenly believe that you are working hard and being effective.</em></div>
+
+  <hr>
 
 
   <br>
@@ -168,17 +311,25 @@
   <table>
     <tr>
       <th style="text-align: center">GroundTruth</th>
-<th style="text-align: center">Proposed</th>
-<th style="text-align: center">-L_w2v2</th>
-<th style="text-align: center">-Split</th>
-<th style="text-align: center">-Conv</th>
+      <th style="text-align: center">Proposed</th>
+      <th style="text-align: center">-Lw2v2</th>
+      <th style="text-align: center">-Split</th>
     </tr>
     <tr>
-      <td style="text-align: center"><audio controls="controls"><source src="./GT\00000112.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed\00000112.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-Lw2v2\00000112.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-split\00000112.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-conv\00000112.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./GT/00000112.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed/00000112.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-Lw2v2/00000112.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-split/00000112.wav" autoplay /></audio></td>
+    </tr>
+    <tr>
+      <th style="text-align: center">-Conv</th>
+      <th style="text-align: center">Pit-Eng Sup</th>
+      <th style="text-align: center">-Split&-Conv</th>
+    </tr>
+    <tr>
+      <td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-conv/00000112.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./LPR_PitEngSup/00000112.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./LPR_IS2023_MT/00000112.wav" autoplay /></audio></td>
     </tr>
   </table>
   <div class="srctext"><b>Text</b>: <em>里面的 走廊 宽阔 而 阴森  ， 头顶 是 绿罩灯  ， 脚下的 地毯 很厚  ， 厚到 扔一个 摔炮 上去 都不会 发出 声音  。</em></div>
@@ -190,17 +341,25 @@
   <table>
     <tr>
       <th style="text-align: center">GroundTruth</th>
-<th style="text-align: center">Proposed</th>
-<th style="text-align: center">-L_w2v2</th>
-<th style="text-align: center">-Split</th>
-<th style="text-align: center">-Conv</th>
+      <th style="text-align: center">Proposed</th>
+      <th style="text-align: center">-Lw2v2</th>
+      <th style="text-align: center">-Split</th>
     </tr>
     <tr>
-      <td style="text-align: center"><audio controls="controls"><source src="./GT\00000640.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed\00000640.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-Lw2v2\00000640.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-split\00000640.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-conv\00000640.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./GT/00000640.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed/00000640.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-Lw2v2/00000640.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-split/00000640.wav" autoplay /></audio></td>
+    </tr>
+    <tr>
+      <th style="text-align: center">-Conv</th>
+      <th style="text-align: center">Pit-Eng Sup</th>
+      <th style="text-align: center">-Split&-Conv</th>
+    </tr>
+    <tr>
+      <td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-conv/00000640.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./LPR_PitEngSup/00000640.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./LPR_IS2023_MT/00000640.wav" autoplay /></audio></td>
     </tr>
   </table>
   <div class="srctext"><b>Text</b>: <em>封口 被 撞裂 开来  ， 佛头 从 里面 滚出来  ， 顺着 书堆 咕噜 下去  ， 咣当 一声 砸在 水泥 地上  。</em></div>
@@ -212,17 +371,25 @@
   <table>
     <tr>
       <th style="text-align: center">GroundTruth</th>
-<th style="text-align: center">Proposed</th>
-<th style="text-align: center">-L_w2v2</th>
-<th style="text-align: center">-Split</th>
-<th style="text-align: center">-Conv</th>
+      <th style="text-align: center">Proposed</th>
+      <th style="text-align: center">-Lw2v2</th>
+      <th style="text-align: center">-Split</th>
     </tr>
     <tr>
-      <td style="text-align: center"><audio controls="controls"><source src="./GT\00015288.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed\00015288.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-Lw2v2\00015288.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-split\00015288.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-conv\00015288.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./GT/00015288.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed/00015288.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-Lw2v2/00015288.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-split/00015288.wav" autoplay /></audio></td>
+    </tr>
+    <tr>
+      <th style="text-align: center">-Conv</th>
+      <th style="text-align: center">Pit-Eng Sup</th>
+      <th style="text-align: center">-Split&-Conv</th>
+    </tr>
+    <tr>
+      <td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-conv/00015288.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./LPR_PitEngSup/00015288.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./LPR_IS2023_MT/00015288.wav" autoplay /></audio></td>
     </tr>
   </table>
   <div class="srctext"><b>Text</b>: <em>故此  ， 摩诃叶 不惜 施展 苦肉计 死守 捱招  ， 直到 最关键 时刻 方才 奇兵 突出  ， 要一击 制胜  。</em></div>
@@ -234,17 +401,25 @@
   <table>
     <tr>
       <th style="text-align: center">GroundTruth</th>
-<th style="text-align: center">Proposed</th>
-<th style="text-align: center">-L_w2v2</th>
-<th style="text-align: center">-Split</th>
-<th style="text-align: center">-Conv</th>
+      <th style="text-align: center">Proposed</th>
+      <th style="text-align: center">-Lw2v2</th>
+      <th style="text-align: center">-Split</th>
     </tr>
     <tr>
-      <td style="text-align: center"><audio controls="controls"><source src="./GT\00005099.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed\00005099.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-Lw2v2\00005099.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-split\00005099.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-conv\00005099.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./GT/00005099.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed/00005099.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-Lw2v2/00005099.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-split/00005099.wav" autoplay /></audio></td>
+    </tr>
+    <tr>
+      <th style="text-align: center">-Conv</th>
+      <th style="text-align: center">Pit-Eng Sup</th>
+      <th style="text-align: center">-Split&-Conv</th>
+    </tr>
+    <tr>
+      <td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-conv/00005099.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./LPR_PitEngSup/00005099.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./LPR_IS2023_MT/00005099.wav" autoplay /></audio></td>
     </tr>
   </table>
   <div class="srctext"><b>Text</b>: <em>曾思涛 脑子里 这么 想的 时候  ， 不觉的 骂自己 很扯淡  ， 胡思 乱想的 水平 最近 有 飞跃的 意思  。</em></div>
@@ -256,17 +431,25 @@
   <table>
     <tr>
       <th style="text-align: center">GroundTruth</th>
-<th style="text-align: center">Proposed</th>
-<th style="text-align: center">-L_w2v2</th>
-<th style="text-align: center">-Split</th>
-<th style="text-align: center">-Conv</th>
+      <th style="text-align: center">Proposed</th>
+      <th style="text-align: center">-Lw2v2</th>
+      <th style="text-align: center">-Split</th>
     </tr>
     <tr>
-      <td style="text-align: center"><audio controls="controls"><source src="./GT\00000195.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed\00000195.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-Lw2v2\00000195.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-split\00000195.wav" autoplay /></audio></td>
-<td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-conv\00000195.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./GT/00000195.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed/00000195.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-Lw2v2/00000195.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-split/00000195.wav" autoplay /></audio></td>
+    </tr>
+    <tr>
+      <th style="text-align: center">-Conv</th>
+      <th style="text-align: center">Pit-Eng Sup</th>
+      <th style="text-align: center">-Split&-Conv</th>
+    </tr>
+    <tr>
+      <td style="text-align: center"><audio controls="controls"><source src="./LPR_proposed-conv/00000195.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./LPR_PitEngSup/00000195.wav" autoplay /></audio></td>
+      <td style="text-align: center"><audio controls="controls"><source src="./LPR_IS2023_MT/00000195.wav" autoplay /></audio></td>
     </tr>
   </table>
   <div class="srctext"><b>Text</b>: <em>这里 是间 办公室  ， 当中 一张 厚实的 办公桌  ， 两侧 两个 大书架 足足 占了 两面墙  。</em></div>
